@@ -12,7 +12,7 @@ def t(n) :
     if x==0 :
       zs=ys
     else :
-      return  (t(x-1),ys)
+      return  t(x-1),ys
 
 # inverse of t, from trees to N
 def n(t) :
@@ -32,7 +32,7 @@ def to_pair_with(b,z) :
   while z>0 and nparity(z)==b :
     z=(z-b)//2
     x+=1
-  return (x,z)  
+  return x,z
     
 # parity in T
 def tparity(xs) :
