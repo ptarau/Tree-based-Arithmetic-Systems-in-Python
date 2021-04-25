@@ -1,4 +1,8 @@
+from hfs import take
+import random
+
 def seq2mset(xs) :
+
   def loop():
     s=0
     for x in xs:
@@ -30,6 +34,40 @@ def set2seq(ms) :
       yield m-s
       s=m+1
   return list(loop())
+
+
+def set_derivatives(s) :
+  d=sorted(set(s))
+  while any(d):
+    yield d
+    d=sorted(set(set2seq(d)))
+  yield d
+
+def mset_derivatives(s) :
+  d=sorted(s)
+  while any(d[0:-1]) and d[-1]!=1:
+    yield d
+    d=sorted(mset2seq(d))
+  yield d
+
+
+def dtest(n=1000,k=20):
+  s=set(random.sample(range(n), k))
+  print('-' * 10)
+  for x in take(10,set_derivatives(s)):
+    print(x)
+  print('-'*10)
+
+#dtest()
+
+def mtest(n=1000,k=32):
+  s=set(random.sample(range(n), k))
+  print('-' * 10)
+  for x in take(36,mset_derivatives(s)):
+    print(x)
+  print('-'*10)
+
+mtest()
 
 def set2bin(xs,l=None) :
   if not l : l = xs[-1]+1
