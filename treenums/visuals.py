@@ -72,4 +72,3 @@ def gt() :
   else :
     showTree(t)
   
-  
