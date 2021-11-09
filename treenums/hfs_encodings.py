@@ -44,6 +44,20 @@ def hfs2n(hfs):
     return ps2n(hfs2n(x) for x in hfs)
 
 
+def hfs2pars(h, size=None):
+    ps = []
+    def walk(hs):
+        ps.append(1)
+        list(map(walk, hs))
+        ps.append(2)
+    walk(h)
+    if size is not None:
+        size0 = len(ps)
+        if size0 < size:
+            ps.extend((size - size0) * [0])
+    return (ps)
+
+
 def psucc(ps):
     if ps == []: return [0]
     rs = []
@@ -183,5 +197,6 @@ def tests():
 
         a = s(a)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     tests()
