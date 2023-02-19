@@ -46,8 +46,7 @@ def showDag(t) :
   def link(a,b) : 
     g.edge(a,b)
         
-  def st(a) :   
-  
+  def st(a) :
     if isinstance(a,tuple) :
       op=a[0]
       for x in a[1:] :

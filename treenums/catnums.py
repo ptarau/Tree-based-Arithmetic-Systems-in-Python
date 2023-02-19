@@ -160,7 +160,13 @@ def decorate(t) :
     else :
       x,y=t
       return (str(n(t)),decorate(x),decorate(y))  
-  
+
+def to_str(x):
+    return str(x).replace(' ','').replace(',','')
+
+def from_str(x):
+   return eval(x.replace(')(','),('))
+
 '''
 def cons(triplet) : 
   b,i,j = triplet

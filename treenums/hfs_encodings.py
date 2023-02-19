@@ -44,12 +44,20 @@ def hfs2n(hfs):
     return ps2n(hfs2n(x) for x in hfs)
 
 
+def set2hfs(xs):
+    return [n2hfs(x) for x in xs]
+
+def hfs2set(hfs):
+    return [hfs2n(x) for x in hfs]
+
 def hfs2pars(h, size=None):
     ps = []
+
     def walk(hs):
         ps.append(1)
         list(map(walk, hs))
         ps.append(2)
+
     walk(h)
     if size is not None:
         size0 = len(ps)

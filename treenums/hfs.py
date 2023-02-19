@@ -33,10 +33,10 @@ def hfs2n(h):
     if h == hfs(): return 0
     return ps2n(list(map(hfs2n, h)))
 
-
+# successor computation with HFS
 def s(hs):
-    if hs == hfs(): return hfs(hfs())
     h = hfs()
+    if hs == h: return hfs(h)
     ds = set()
     while h in hs:
         ds.add(h)
@@ -45,7 +45,7 @@ def s(hs):
     rs.append(h)
     return hfs(*rs)
 
-
+# predecessor computation with HFS
 def p(hs):  # inefficient for evens
     h = hfs()
     if h in hs: return hfs(*(hs - hfs(h)))
