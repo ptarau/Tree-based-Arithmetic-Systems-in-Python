@@ -47,23 +47,21 @@ def hfs2n(hfs):
 def set2hfs(xs):
     return [n2hfs(x) for x in xs]
 
+
 def hfs2set(hfs):
     return [hfs2n(x) for x in hfs]
 
-def hfs2pars(h, size=None):
-    ps = []
 
-    def walk(hs):
-        ps.append(1)
-        list(map(walk, hs))
-        ps.append(2)
+def to_str(x):
+    return str(x).replace(' ', '').replace(',', '')
 
-    walk(h)
-    if size is not None:
-        size0 = len(ps)
-        if size0 < size:
-            ps.extend((size - size0) * [0])
-    return (ps)
+
+def from_str(ps):
+    s = str(ps)
+    s = s.replace(', ', '').replace('1', '[').replace('2', ']')
+    s = s.replace('][', '],[')
+    s = eval(s)
+    return s
 
 
 def psucc(ps):
@@ -205,6 +203,25 @@ def tests():
 
         a = s(a)
 
+    hf = n2hfs(666)
+    hn = hfs2n(hf)
+    print('H:', hf, hn)
+    ps = to_str(hf)
+    print('P:', ps)
+    t = from_str(ps)
+    print('T:', t)
+    n = hfs2n(t)
+    print('N:', n)
+
+
+def gen_dataset(n):
+    m = 1 << n
+    with open('hfs_data.txt','w') as f:
+       for i in range(m):
+           hfs=n2hfs(i)
+           print(f"{to_str(hfs)}:{to_str(s(hfs))}",file=f)
+
 
 if __name__ == "__main__":
-    tests()
+    #tests()
+    gen_dataset(16)
