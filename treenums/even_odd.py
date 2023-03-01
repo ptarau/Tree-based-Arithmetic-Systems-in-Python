@@ -2,6 +2,7 @@
 representation of positive integers as odd-even trees
 """
 
+
 def to_repr(name, x, xs):
     """
     returns readable representation for Even or Odd instances
@@ -22,6 +23,7 @@ class Unit(Pos):
     """
     has sible instace One
     """
+
     def __init__(self):
         pass
 
@@ -36,6 +38,7 @@ class Even(Pos):
     """
     class of trees corresponding to even numbers
     """
+
     def __init__(self, x, xs):
         self.x = x
         self.xs = xs
@@ -49,6 +52,7 @@ class Odd(Pos):
     """
      class of trees corresponding to odd numbers
      """
+
     def __init__(self, x, xs):
         self.x = x
         self.xs = xs
@@ -63,6 +67,7 @@ def to_counters(k):
     transform a number seen as in its binary representation
     as a sequence of counters for alternationg 0...0 and 1...1 blocks
     """
+
     def split_on(b, z):
         if z > 1 and z % 2 == b:
             x, y = split_on(b, (z - b) // 2)
@@ -116,12 +121,24 @@ def p_(t):
 def test_even_odd():
     a = Even(One, [Odd(One, []), One])
     print(a)
-    for i in range(1,20):
-        t=p(i)
-        j=p_(t)
-        print(i,'-->',t)
+    for i in range(1, 20):
+        t = p(i)
+        j = p_(t)
+        print(i, '-->', t)
         assert i == j
+
+
+def gen_data(n=5):
+    m = 1 << n
+    with open('even_odd_data.txt', 'w') as f:
+        for i in range(1, m + 1):
+            p_i=str(p(i)).replace('Even','E').replace('Odd','O').replace('One','i')
+            p_j = str(p(i+1)).replace('Even', 'E').replace('Odd', 'O').replace('One', 'i')
+            s=f'{p_i}:{p_j}'
+            print(s,file=f)
+
 
 
 if __name__ == "__main__":
     test_even_odd()
+    #gen_data(n=16)
