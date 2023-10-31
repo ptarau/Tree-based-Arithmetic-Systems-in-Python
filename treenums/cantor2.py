@@ -36,4 +36,5 @@ def rtest() :
     print((x,y),'<->',z,'==',n)
     assert n==z
 
-rtest()
+if __name__=="__main__":
+    rtest()
